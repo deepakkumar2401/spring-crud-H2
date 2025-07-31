@@ -24,4 +24,9 @@ public class StudentController {
     public ResponseEntity<ApiResponse> getStudent(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(new ApiResponse(false, "Student found successfully....", studentService.getStudent(id)));
     }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<ApiResponse> getAll() {
+        return ResponseEntity.ok(new ApiResponse(false, "Students Found Successfully....", studentService.getAll()));
+    }
 }

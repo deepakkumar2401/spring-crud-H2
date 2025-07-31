@@ -8,6 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,5 +37,20 @@ public class StudentServiceImpl implements StudentService {
             return studentDto;
         }
         throw new DataNotFoundException("Student not present with this id:");
+    }
+
+    @Override
+    public List<StudentDto> getAll() {
+        List<Student> studentList = studentRepository.findAll();
+        if (studentList.isEmpty()) {
+            throw new DataNotFoundException("Data Not Found");
+        }
+        List<StudentDto> studentDtoList = new LinkedList<>();
+        for (Student student : studentList) {
+            StudentDto studentDto = new StudentDto();
+            BeanUtils.copyProperties(student, studentDto);
+            studentDtoList.add(studentDto);
+        }
+        return studentDtoList;
     }
 }
