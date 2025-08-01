@@ -11,4 +11,6 @@ public interface StudentService {
     public StudentDto getStudent(Long id);
 
     public List<StudentDto> getAll();
+
+    public StudentDto deleteStudent(Long id);
 }

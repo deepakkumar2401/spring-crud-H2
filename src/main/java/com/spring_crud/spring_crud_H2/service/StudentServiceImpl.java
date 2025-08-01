@@ -53,4 +53,16 @@ public class StudentServiceImpl implements StudentService {
         }
         return studentDtoList;
     }
+
+    @Override
+    public StudentDto deleteStudent(Long id) {
+        Optional<Student> byId = studentRepository.findById(id);
+        if (byId.isPresent()) {
+            studentRepository.deleteById(id);
+            StudentDto studentDto = new StudentDto();
+            BeanUtils.copyProperties(byId.get(), studentDto);
+            return studentDto;
+        }
+        throw new DataNotFoundException("Student not present with this id:");
+    }
 }

@@ -29,4 +29,9 @@ public class StudentController {
     public ResponseEntity<ApiResponse> getAll() {
         return ResponseEntity.ok(new ApiResponse(false, "Students Found Successfully....", studentService.getAll()));
     }
+
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<ApiResponse> deleteStudent(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(new ApiResponse(false, "Student Data Deleted", studentService.deleteStudent(id)));
+    }
 }
